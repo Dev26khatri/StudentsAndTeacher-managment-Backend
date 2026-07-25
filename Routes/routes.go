@@ -18,21 +18,21 @@ func RegisterRoutes(
 
 func RegisterStudentRoutes(
 	router *gin.Engine,
-	handler *students.Handler,
+	studenthandler *students.Handler,
 	userhandler *users.Handler,
 
 ) {
 	student := router.Group("/students")
 	{
-		student.POST("/", handler.CreateStudent)
-		student.GET("/", handler.GetAllStudents)
-		student.GET("/:studentId", handler.GetStudentByID)
-		student.PUT("/:studentId", handler.UpdateStudentByID)
-		student.DELETE("/:studentId", handler.DeleteStudentByID)
+		student.POST("/", studenthandler.CreateStudent)
+		student.GET("/", studenthandler.GetAllStudents)
+		student.GET("/:studentId", studenthandler.GetStudentByID)
+		student.PUT("/:studentId", studenthandler.UpdateStudentByID)
+		student.DELETE("/:studentId", studenthandler.DeleteStudentByID)
 	}
 	user := router.Group("/users")
 	{
-		user.POST("/register")
-		user.POST("/login")
+		user.POST("/register", userhandler.Register)
+		user.POST("/login", userhandler.Login)
 	}
 }
