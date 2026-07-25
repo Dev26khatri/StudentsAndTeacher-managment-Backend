@@ -1,0 +1,42 @@
+# Compiled binaries and vectors
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Test binaries
+*.test
+*.out
+
+# Output directories (commonly used for builds)
+bin/
+dist/
+out/
+
+# Go workspaces and vendoring
+go.work
+go.work.sum
+# Uncomment the line below if you do NOT want to commit your vendor folder
+# vendor/
+
+# Coverage and profiling files
+c.out
+coverage.txt
+profile.out
+*.prof
+
+# Environment variables and secrets
+.env
+.env.local
+*.env
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Operating System files
+.DS_Store
+Thumbs.db

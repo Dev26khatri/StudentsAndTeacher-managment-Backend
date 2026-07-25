@@ -29,7 +29,7 @@ func (s *Service) Register(req dto.RegisterUserRequest) error {
 		return err
 	}
 
-	//Hash the Passing password
+	//Hash the Entered password
 	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(req.Password), bcrypt.DefaultCost)
 
 	if err != nil {
