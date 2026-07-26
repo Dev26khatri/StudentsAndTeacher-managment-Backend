@@ -3,6 +3,7 @@ package routes
 import (
 	students "GOGIN/Students"
 	users "GOGIN/Users"
+	"GOGIN/middleware"
 
 	"github.com/gin-gonic/gin"
 )
@@ -23,6 +24,7 @@ func RegisterStudentRoutes(
 
 ) {
 	student := router.Group("/students")
+	student.Use(middleware.JWTAuthMiddleware())
 	{
 		student.POST("/", studenthandler.CreateStudent)
 		student.GET("/", studenthandler.GetAllStudents)
