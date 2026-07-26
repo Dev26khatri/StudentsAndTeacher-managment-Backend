@@ -54,3 +54,6 @@ func (r *gormRepository) GetById(id uint) (*User, error) {
 
 	return &user, nil
 }
+func (r *gormRepository) CreateWithTx(tx *gorm.DB, user *User) error {
+	return tx.Create(user).Error
+}
