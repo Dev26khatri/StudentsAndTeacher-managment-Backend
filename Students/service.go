@@ -21,7 +21,7 @@ import (
 type Service struct {
 	db         *gorm.DB
 	repository Repository
-	userRepo   *users.Repository
+	userRepo   users.Repository
 }
 
 func NewService(repository Repository) *Service {
@@ -78,4 +78,22 @@ func (s *Service) Delete(id int) error {
 		return errors.New("Invalid I")
 	}
 	return s.repository.Delete(id)
+}
+
+func (s *Service) CreateStudent(student Student, user users.User) error {
+
+	return s.db.Transaction(func(tx *gorm.DB) error {
+
+		if err := s.repository.CreateWithTx(tx, &student); err != nil {
+			return err
+		}
+
+		if err := s.userRepo.CreateWithTx(tx, &user); err != nil {
+			return err
+		}
+
+		return nil
+
+	})
+
 }
