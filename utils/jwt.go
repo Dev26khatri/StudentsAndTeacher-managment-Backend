@@ -23,7 +23,7 @@ func GenerateToken(userID uint, email string) (string, error) {
 			IssuedAt:  jwt.NewNumericDate(time.Now()),
 		},
 	}
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, claims)
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 	secret := os.Getenv("JWT_SECRET")
 
 	tokenString, err := token.SignedString([]byte(secret))

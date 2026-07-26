@@ -2,6 +2,7 @@ package users
 
 import (
 	dto "GOGIN/DTO"
+	"GOGIN/utils"
 	"errors"
 
 	"golang.org/x/crypto/bcrypt"
@@ -51,11 +52,11 @@ func (s *Service) Register(req dto.RegisterUserRequest) error {
 	return nil
 
 }
-func (s *Service) Login(req dto.LoginUserRequest) (*User, error) {
+func (s *Service) Login(req dto.LoginUserRequest) (string, error) {
 	//step 1 Find User by email
 	user, err := s.repository.GetByEmail(req.Email)
 	if err != nil {
-		return nil, errors.New("Invalid email or password")
+		return "", errors.New("Invalid email or password")
 	}
 
 	// step 2 compare the enterd password with stored has password
@@ -65,9 +66,13 @@ func (s *Service) Login(req dto.LoginUserRequest) (*User, error) {
 	)
 
 	if err != nil {
-		return nil, errors.New("Invalid email or password")
+		return "", errors.New("Invalid email or password")
+	}
+	token, err := utils.GenerateToken(user.ID, user.Email)
+	if err != nil {
+		return "", err
 	}
 
 	//Step 3 login succesffuly
-	return user, nil
+	return token, nil
 }
