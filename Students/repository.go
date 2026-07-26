@@ -138,3 +138,9 @@ func (r *gormRepository) Delete(id int) error {
 	}
 	return result.Error
 }
+
+func (r *gormRepository) CreateWithTx(tx *gorm.DB, student *Student) error {
+
+	return tx.Create(student).Error
+}
+
