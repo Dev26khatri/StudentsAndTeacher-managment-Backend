@@ -16,6 +16,7 @@ type Repository interface {
 	GetById(id int) (Student, error)
 	Update(student dto.UpdateStudentRequest, id int) error
 	Delete(id int) error
+	CreateWithTx(tx *gorm.DB, student *Student) error
 }
 
 type gormRepository struct {
@@ -143,4 +144,3 @@ func (r *gormRepository) CreateWithTx(tx *gorm.DB, student *Student) error {
 
 	return tx.Create(student).Error
 }
-
