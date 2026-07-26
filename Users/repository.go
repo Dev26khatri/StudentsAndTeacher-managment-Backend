@@ -10,6 +10,7 @@ type Repository interface {
 	CreateUser(user User) (*User, error)
 	GetByEmail(email string) (*User, error)
 	GetById(id uint) (*User, error)
+	CreateWithTx(tx *gorm.DB, user *User) error
 }
 
 type gormRepository struct {

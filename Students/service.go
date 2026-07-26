@@ -3,8 +3,11 @@ package students
 //Services takes only bussiness logics and validations
 import (
 	dto "GOGIN/DTO"
+	users "GOGIN/Users"
 	"errors"
 	"log"
+
+	"gorm.io/gorm"
 )
 
 // type StudentService interface {
@@ -16,7 +19,9 @@ import (
 // }
 
 type Service struct {
+	db         *gorm.DB
 	repository Repository
+	userRepo   *users.Repository
 }
 
 func NewService(repository Repository) *Service {
