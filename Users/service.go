@@ -39,7 +39,7 @@ func (s *Service) Register(req dto.RegisterUserRequest) error {
 	//Convert DTO to model
 
 	user := User{
-		Name:     req.Name,
+		// Name:     req.Name,
 		Email:    req.Email,
 		Password: string(hashedPassword),
 	}
