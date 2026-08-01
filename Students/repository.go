@@ -88,7 +88,7 @@ func (r *gormRepository) GetAll() ([]Student, error) {
 
 	// return students, nil
 	var student []Student
-	err := r.db.Find(&student).Error
+	err := r.db.Preload("User").Find(&student).Error
 	return student, err
 }
 func (r *gormRepository) GetById(id int) (Student, error) {
@@ -101,7 +101,7 @@ func (r *gormRepository) GetById(id int) (Student, error) {
 	// 	&student.Email,
 	// 	&student.Age,
 	// )
-	err := r.db.First(&student, id).Error
+	err := r.db.Preload("User").First(&student, id).Error
 	if err != nil {
 		return Student{}, err
 	}

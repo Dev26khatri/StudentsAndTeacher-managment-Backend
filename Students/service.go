@@ -84,11 +84,11 @@ func (s *Service) CreateStudent(student Student, user users.User) error {
 
 	return s.db.Transaction(func(tx *gorm.DB) error {
 
-		if err := s.repository.CreateWithTx(tx, &student); err != nil {
+		if err := s.userRepo.CreateWithTx(tx, &user); err != nil {
 			return err
 		}
-
-		if err := s.userRepo.CreateWithTx(tx, &user); err != nil {
+		student.UserID = user.ID
+		if err := s.repository.CreateWithTx(tx, &student); err != nil {
 			return err
 		}
 
