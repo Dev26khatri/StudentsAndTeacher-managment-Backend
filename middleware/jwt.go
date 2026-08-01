@@ -10,6 +10,7 @@ import (
 
 func JWTAuthMiddleware() gin.HandlerFunc {
 	return func(c *gin.Context) {
+		//It see the Authorization section in client so first check if Your token is not into authorization then hiting the warning of unathorized
 		authHeader := c.GetHeader("Authorization")
 
 		if authHeader == "" {
@@ -20,6 +21,7 @@ func JWTAuthMiddleware() gin.HandlerFunc {
 			return
 		}
 
+		//Fine you enter your token at perfect section but you forgot to adding the Bearer keyword at starting of the token then it will hiting the warning 
 		if !strings.HasPrefix(authHeader, "Bearer ") {
 			c.JSON(http.StatusUnauthorized, gin.H{
 				"error": "Invalid authorization formate ex.(space in Token and Bearer key word )",

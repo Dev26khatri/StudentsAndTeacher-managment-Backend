@@ -1,10 +1,24 @@
 package students
 
+import (
+	users "GOGIN/Users"
+
+	"gorm.io/gorm"
+)
+
 type Student struct {
-	ID    int    `gorm:"id"`
-	Name  string `gorm:"name"`
-	Email string `gorm:"email"`
-	Age   int    `gorm:"age"`
+	gorm.Model
+
+	// ID    int    `gorm:"id"`
+	// Email string `gorm:"email"` Not using becuase we are using in the User model and students and User connected togather
+	Name string `gorm:"name"`
+	Age  int    `gorm:"age"`
+
+	//Foreign key
+	UserID uint `gorm:"not null;uniqueIndex"`
+
+	//Association
+	User users.User `gorm:"foreignKey:UserID;references:ID"`
 }
 
 // type CreateStudentRequest struct {

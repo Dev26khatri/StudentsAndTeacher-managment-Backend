@@ -34,9 +34,9 @@ func (s *Service) Create(student Student) (*Student, error) {
 	if student.Name == "" {
 		return nil, errors.New("name is required")
 	}
-	if student.Email == "" {
-		return nil, errors.New("email is required")
-	}
+	// if student.Email == "" {
+	// 	return nil, errors.New("email is required")
+	// }
 	if student.Age < 18 {
 		return nil, errors.New("you are not elegible. Student age must be at 18 ")
 	}

@@ -40,10 +40,12 @@ func (h *Handler) CreateStudent(c *gin.Context) {
 		return
 	}
 	student := Student{
-		Name:  req.Name,
-		Email: req.Email,
-		Age:   req.Age,
+		Name: req.Name,
+		Age:  req.Age,
 	}
+
+	// hashedPassword ,err := utils.
+
 	result, err := h.service.Create(student)
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, gin.H{
